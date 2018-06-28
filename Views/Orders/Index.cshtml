@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SalesReport.Models.Orders>
+
+
+@{
+    ViewBag.Title = "Order list";
+}
+
+<h2>Order list</h2>
+<form method="get">
+    <div class="form-inline">
+        <p>@Html.Label("Date from:")
+        @Html.Editor("dateFrom", new { htmlAttributes = new { @class = "form-control" } })
+        @Html.Label("Date to:")
+        @Html.Editor("dateTo", new { htmlAttributes = new { @class = "form-control" } })</p>
+        <p><input type="submit" value="Reload orders" ></p>
+    </div>
+</form>
+<form action="/Orders/SendEmail" method="post">
+    <div class="form-inline">
+        <p>
+            @Html.Label("Email address:")
+            @Html.Editor("emailAddress", new { htmlAttributes = new { @class = "form-control" } })
+        </p>
+        <p><input type="submit" value="Send email"/></p>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quntity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quntity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@*<script type="text/javascript">
+            $(function () {
+                $('#dateTo').datetimepicker(
+                {
+                    format: "DD/MM/YYYY"
+                }).on('dp.Change', function (e) {
+                    $(this).data('DateTimePicker');
+                });
+                $('#dateFrom').datetimepicker(
+               {
+                   format: "DD/MM/YYYY"
+               }).on('dp.Change', function (e) {
+                   $(this).data('DateTimePicker');
+               });
+            });
+</script>*@
